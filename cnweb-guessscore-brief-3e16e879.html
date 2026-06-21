@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>足球竞猜 · 简明指南</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: linear-gradient(145deg, #fce9d7 0%, #f7d6b3 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+    }
+
+    .page-wrapper {
+      max-width: 980px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+
+    /* 主视觉卡片 —— hero */
+    .hero-card {
+      background: #fffcf7;
+      border-radius: 2.5rem 2.5rem 2rem 2rem;
+      padding: 2.5rem 2.2rem 2.8rem;
+      box-shadow: 0 16px 36px -10px rgba(160, 100, 50, 0.22);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: -60%;
+      left: -30%;
+      width: 180%;
+      height: 180%;
+      background: radial-gradient(circle at 30% 40%, rgba(242, 192, 122, 0.18), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-card h1 {
+      font-size: 2.6rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #4d2e1b;
+      position: relative;
+    }
+
+    .hero-card h1 span {
+      display: inline-block;
+      background: linear-gradient(to right, #bf6f2c, #a4531f);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      color: #5e4130;
+      max-width: 640px;
+      margin: 1.2rem auto 0;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    /* 通用白色内容卡片 */
+    .card {
+      background: #ffffff;
+      border-radius: 1.8rem;
+      padding: 2rem 2.2rem;
+      box-shadow: 0 8px 28px -6px rgba(90, 60, 30, 0.12);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 12px 34px -8px rgba(140, 90, 40, 0.18);
+    }
+
+    .card h2 {
+      font-size: 1.6rem;
+      font-weight: 550;
+      color: #402e1f;
+      margin-bottom: 1rem;
+      border-left: 5px solid #e3a56c;
+      padding-left: 0.9rem;
+    }
+
+    .card p {
+      line-height: 1.7;
+      color: #3e3026;
+      margin-bottom: 0.9rem;
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .two-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+    }
+
+    /* 圆角按钮感链接 */
+    .link-button {
+      display: inline-block;
+      background: #ffffff;
+      border: 1.5px solid #dbbc9b;
+      border-radius: 200px;
+      padding: 0.4rem 1.1rem;
+      font-size: 0.95rem;
+      font-weight: 480;
+      color: #6f4f32;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(180, 130, 70, 0.08);
+      margin: 0 0.1rem;
+    }
+
+    .link-button:hover {
+      background: #f3efe8;
+      border-color: #b5895d;
+      color: #3f2a19;
+      box-shadow: 0 4px 12px rgba(170, 110, 50, 0.12);
+    }
+
+    .link-button:active {
+      transform: scale(0.96);
+    }
+
+    /* 自然段落内嵌链接（无按钮样式） */
+    .inline-link {
+      color: #a6541e;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1.5px dotted #d9b187;
+      transition: border 0.15s, color 0.15s;
+    }
+
+    .inline-link:hover {
+      color: #7c3f14;
+      border-bottom: 1.5px solid #b8733e;
+    }
+
+    /* 提示卡片 & FAQ 摘要 合并为紧凑区块 */
+    .tips-faq {
+      background: #fff9f2;
+      border-radius: 1.8rem;
+      padding: 1.8rem 2rem;
+    }
+
+    .tips-faq h3 {
+      font-size: 1.2rem;
+      font-weight: 550;
+      color: #4b3524;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tips-faq h3::before {
+      content: '📌';
+      font-size: 1.2rem;
+    }
+
+    .tips-faq ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .tips-faq li {
+      font-size: 0.98rem;
+      padding-left: 1.3rem;
+      position: relative;
+      color: #3d2e22;
+      line-height: 1.5;
+    }
+
+    .tips-faq li::before {
+      content: '·';
+      position: absolute;
+      left: 0.2rem;
+      font-weight: bold;
+      color: #b77a48;
+    }
+
+    .faq-summary {
+      margin-top: 1.2rem;
+      border-top: 1px solid #e5d4c2;
+      padding-top: 1.2rem;
+    }
+
+    .faq-summary p {
+      font-size: 0.97rem;
+      color: #4d3b2d;
+      margin-bottom: 0.3rem;
+    }
+
+    .faq-summary details {
+      margin: 0.6rem 0 0.3rem;
+    }
+
+    .faq-summary summary {
+      cursor: pointer;
+      font-weight: 500;
+      color: #6f482b;
+      padding: 0.2rem 0;
+    }
+
+    .faq-summary summary:hover {
+      color: #8f5c34;
+    }
+
+    .faq-summary details p {
+      margin: 0.5rem 0 0.2rem 0.8rem;
+      font-size: 0.95rem;
+      color: #3f3227;
+    }
+
+    /* 适合人群与场景合一 */
+    .audience-scene {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem 2.2rem;
+      margin-top: 0.8rem;
+    }
+
+    .audience-scene > div {
+      flex: 1 1 180px;
+    }
+
+    .audience-scene h4 {
+      font-weight: 550;
+      font-size: 1.05rem;
+      color: #4d3522;
+      margin-bottom: 0.4rem;
+    }
+
+    .audience-scene ul {
+      list-style: none;
+      padding-left: 0.3rem;
+    }
+
+    .audience-scene li {
+      font-size: 0.96rem;
+      padding: 0.25rem 0;
+      color: #4c382b;
+      display: flex;
+      align-items: baseline;
+      gap: 0.3rem;
+    }
+
+    .audience-scene li::before {
+      content: '▹';
+      color: #c1854d;
+    }
+
+    /* 响应式 */
+    @media (max-width: 720px) {
+      body {
+        padding: 1.2rem 1rem;
+      }
+      .two-columns {
+        grid-template-columns: 1fr;
+      }
+      .hero-card h1 {
+        font-size: 2rem;
+      }
+      .card {
+        padding: 1.5rem 1.4rem;
+      }
+      .tips-faq {
+        padding: 1.4rem 1.2rem;
+      }
+    }
+
+    @media (max-width: 460px) {
+      .hero-card {
+        padding: 1.8rem 1.2rem;
+      }
+      .hero-card h1 {
+        font-size: 1.7rem;
+      }
+      .card h2 {
+        font-size: 1.3rem;
+      }
+    }
+
+    /* 小装饰 */
+    .footnote {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #7c6b5b;
+      padding: 1rem 0 0.2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+
+    <!-- hero 主视觉 -->
+    <div class="hero-card">
+      <h1>⚽ 简明指南 · <span>足球竞猜</span></h1>
+      <div class="hero-desc">
+        从基础认知到理性参与，一份聚焦信息与方法的轻量地图。<br>
+        梳理常见思路，搭配实用提醒，帮你更快熟悉足球竞猜的轮廓。
+      </div>
+    </div>
+
+    <!-- 双列：用途卡片 + 简明特点 -->
+    <div class="two-columns">
+      <div class="card">
+        <h2>用途卡片</h2>
+        <p>足球竞猜不仅是比赛日的延伸讨论，更是一套结合数据、球队动态与概率思维的观察方式。许多爱好者将其视为提升观赛投入感的一种途径——通过分析阵型、伤病、主客场差异等变量，形成自己的判断框架。</p>
+        <p>无论是用于个人娱乐、朋友间的切磋，还是单纯想加深对足球战术的理解，<a href="https://cnweb-guessscore.com" class="inline-link">足球竞猜</a>都可以成为一个有趣的切面。它并不要求你有专业背景，但保持信息摄入的广度往往让思路更清晰。</p>
+      </div>
+
+      <div class="card">
+        <h2>本质特点</h2>
+        <p>足球竞猜的核心在于“可推敲的不确定性”。每一场比赛都受众多实时因素影响，因此没有绝对公式。但通过长期观察联赛节奏、球队风格及赛季阶段，可以逐步建立个人的参考维度。</p>
+        <p>平台通常提供丰富的数据面板、历史交锋与实时赔率变动，适合静下心来横向对比。保持节奏，把注意力放在信息整理而非短期结果上，是一个更可持续的出发点。</p>
+      </div>
+    </div>
+
+    <!-- 适合人群 + 场景 (混合卡片) -->
+    <div class="card">
+      <h2>适合人群 & 典型场景</h2>
+      <div class="audience-scene">
+        <div>
+          <h4>👥 适合人群</h4>
+          <ul>
+            <li>日常关注五大联赛、欧冠的球迷</li>
+            <li>对数据统计与赛前分析感兴趣的爱好者</li>
+            <li>希望用更结构化的方式参与足球讨论的人</li>
+            <li>喜欢在比赛日之前做一点“功课”的朋友</li>
+          </ul>
+        </div>
+        <div>
+          <h4>📌 典型场景</h4>
+          <ul>
+            <li>周末联赛前，快速查阅伤停与天气</li>
+            <li>杯赛淘汰赛阶段，评估战意与轮换</li>
+            <li>与朋友交流时，引用近期交锋数据</li>
+            <li>赛季末段，分析保级/争冠额外动力</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 提示 & FAQ 摘要 (紧凑) -->
+    <div class="tips-faq">
+      <h3>访问提醒 · 常见切入点</h3>
+      <ul>
+        <li>初次接触时，优先关注“球队近期状态”与“主客场差异”两个基础维度。</li>
+        <li>留意比赛日当天的首发名单——部分核心球员轮换可能大幅改变场面走向。</li>
+        <li>善用平台提供的对阵历史与数据走势图，比单纯看积分更有参考价值。</li>
+        <li>保持平常心，足球的魅力往往在于它的不可完全预测性。</li>
+      </ul>
+      <div class="faq-summary">
+        <p><strong>FAQ 摘要</strong></p>
+        <details>
+          <summary>足球竞猜需要很懂足球吗？</summary>
+          <p>不一定。基础规则了解后，可以从球队近况、积分榜形势等公开信息入手，逐步积累经验。很多深度爱好者也是从一两个联赛开始熟悉的。</p>
+        </details>
+        <details>
+          <summary>如何提高判断的参考性？</summary>
+          <p>建议交叉对比多个信息来源：官方伤停报告、专业数据网站、以及主流平台的动态概率变化。信息维度越多，盲区越少。</p>
+        </details>
+        <details>
+          <summary>直接去网站能看到什么？</summary>
+          <p>你可以在 <a href="https://cnweb-guessscore.com" class="link-button">足球竞猜</a> 页面中找到当日及未来数日的对阵列表、实时变动数据以及社区讨论区，适合赛前做快速浏览。</p>
+        </details>
+      </div>
+    </div>
+
+    <!-- 自然链接段落 -->
+    <div class="card" style="text-align: left;">
+      <p style="font-size: 1rem;">如果你想直接浏览赛事面板、球队数据或社区交流，不妨将 <a href="https://cnweb-guessscore.com" class="link-button">足球竞猜</a> 加入书签。页面会按比赛日自动更新，比较适合用来做每周的赛前信息整理。</p>
+      <p style="margin-top: 0.9rem; color: #4d3b2d;">无论你是刚开始了解，还是已经形成自己的分析习惯，保持开放的信息渠道与轻松的心态，往往能让整个过程更有收获。</p>
+    </div>
+
+    <div class="footnote">
+      — 简明信息卡 · 保持节奏 理性观察 —
+    </div>
+  </div>
+</body>
+</html>
