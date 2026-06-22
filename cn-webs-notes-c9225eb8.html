@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>南宫体育 · 信息卡片式介绍</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', 'Helvetica Neue', sans-serif;
+      background: linear-gradient(145deg, #fde9e0 0%, #f7d6c0 45%, #f2c5ab 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1.2rem;
+      line-height: 1.6;
+      color: #3e2c24;
+    }
+
+    .page-wrap {
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    /* 主视觉卡片 */
+    .hero-card {
+      background: #fffbf8;
+      border-radius: 2.5rem;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 12px 32px rgba(120, 60, 40, 0.10);
+      margin-bottom: 2rem;
+      transition: box-shadow 0.2s ease;
+    }
+    .hero-card h1 {
+      font-size: 2.4rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: #5b3a2b;
+      margin-bottom: 0.5rem;
+    }
+    .hero-card .sub {
+      font-size: 1.1rem;
+      color: #7f5e4b;
+      border-left: 4px solid #d9a68b;
+      padding-left: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .hero-card p {
+      font-size: 1rem;
+      max-width: 80%;
+      color: #5a4236;
+    }
+
+    /* 通用卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.8rem;
+      margin-bottom: 2rem;
+    }
+    .card {
+      background: #fffbf8;
+      border-radius: 2rem;
+      padding: 1.8rem 1.8rem 2rem;
+      box-shadow: 0 6px 20px rgba(100, 60, 40, 0.06);
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(110, 60, 35, 0.10);
+    }
+    .card h2 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: #5b3a2b;
+      border-bottom: 2px solid #edd5c6;
+      padding-bottom: 0.4rem;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+    .card ul, .card p {
+      font-size: 0.95rem;
+      color: #4a372e;
+    }
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .card li {
+      margin-bottom: 0.6rem;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+    .card li::before {
+      content: "▸";
+      position: absolute;
+      left: 0;
+      color: #c6896e;
+    }
+
+    /* 延伸阅读卡片（自然链接嵌入） */
+    .read-card {
+      background: #fffbf8;
+      border-radius: 2rem;
+      padding: 1.8rem 2rem;
+      box-shadow: 0 6px 20px rgba(100, 60, 40, 0.06);
+      margin-bottom: 2rem;
+    }
+    .read-card h2 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #5b3a2b;
+      margin-bottom: 0.8rem;
+    }
+    .read-card p {
+      font-size: 0.98rem;
+      color: #4a372e;
+      margin-bottom: 0.5rem;
+    }
+    .read-card a {
+      text-decoration: none;
+      color: #b67252;
+      font-weight: 500;
+      border-bottom: 1px dashed #dbb9a4;
+      transition: border-bottom 0.2s, color 0.2s;
+    }
+    .read-card a:hover {
+      color: #8f5338;
+      border-bottom: 1px solid #8f5338;
+    }
+
+    /* FAQ 摘要卡片 */
+    .faq-card {
+      background: #fffbf8;
+      border-radius: 2rem;
+      padding: 1.8rem 2rem 2rem;
+      box-shadow: 0 6px 20px rgba(100, 60, 40, 0.06);
+      margin-bottom: 2rem;
+    }
+    .faq-card h2 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      color: #5b3a2b;
+      margin-bottom: 0.8rem;
+    }
+    .faq-item {
+      margin-bottom: 0.8rem;
+    }
+    .faq-item strong {
+      display: block;
+      font-weight: 500;
+      color: #5b3a2b;
+      margin-bottom: 0.2rem;
+    }
+    .faq-item p {
+      margin: 0;
+      color: #4a372e;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #856b5c;
+      padding: 1.5rem 0 0.5rem;
+      border-top: 1px solid #e7cdbc;
+      margin-top: 0.8rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 650px) {
+      body {
+        padding: 1.2rem 1rem;
+      }
+      .hero-card {
+        padding: 2rem 1.5rem;
+      }
+      .hero-card h1 {
+        font-size: 1.9rem;
+      }
+      .hero-card p {
+        max-width: 100%;
+      }
+      .card-grid {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+      }
+      .card, .read-card, .faq-card {
+        padding: 1.5rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- 主视觉卡片 -->
+  <div class="hero-card">
+    <h1>南宫体育</h1>
+    <div class="sub">信息卡片式 · 日常查询与对照</div>
+    <p>这里整理了一些围绕体育资讯的常见线索，适合在碎片时间里随手翻看，或作为延伸阅读的起点。</p>
+  </div>
+
+  <!-- 双卡片网格：用途 + 适合人群 -->
+  <div class="card-grid">
+    <!-- 用途卡片 -->
+    <div class="card">
+      <h2>常用场景</h2>
+      <ul>
+        <li>快速查阅赛程与近期比分</li>
+        <li>对比不同赛事的数据摘要</li>
+        <li>了解项目规则或背景信息</li>
+        <li>在讨论前做一点基础核对</li>
+        <li>作为日常关注体育的轻量入口</li>
+      </ul>
+    </div>
+    <!-- 适合人群卡片 -->
+    <div class="card">
+      <h2>适合人群</h2>
+      <ul>
+        <li>保持运动习惯但时间有限的爱好者</li>
+        <li>需要临时查找体育信息的上班族</li>
+        <li>刚接触某项运动、想先了解的入门者</li>
+        <li>偶尔和朋友聊起赛事想确认细节的人</li>
+        <li>偏好简洁信息卡片而非冗长文章的用户</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 延伸阅读段落（自然链接嵌入） -->
+  <div class="read-card">
+    <h2>延伸阅读</h2>
+    <p>如果你在找更完整的赛事档案或数据对照，可以试试 <a href="https://cn-webs-ngsport.com">南宫体育</a> 上的内容整理。页面结构偏实用，适合在需要核对赛果、了解项目背景时顺手翻翻。</p>
+    <p>日常使用时，不妨把它当作一个轻量的信息台——不必每次都从头看到尾，按需查阅就好。</p>
+  </div>
+
+  <!-- FAQ 摘要卡片 (非完整FAQ，只摘录两三个常见疑问) -->
+  <div class="faq-card">
+    <h2>常见疑问摘要</h2>
+    <div class="faq-item">
+      <strong>这里的信息更新频率如何？</strong>
+      <p>一般会跟随主要赛事周期进行内容补充，重大比赛后会尽快整理对照数据。</p>
+    </div>
+    <div class="faq-item">
+      <strong>是否需要注册才能使用？</strong>
+      <p>目前页面内的信息可以直接查看，不需要额外注册。部分功能可能后续开放。</p>
+    </div>
+    <div class="faq-item">
+      <strong>和一般体育网站有什么不同？</strong>
+      <p>更偏向信息卡片式的整理，方便快速对照，减少无关信息的干扰。</p>
+    </div>
+  </div>
+
+  <footer>
+    内容仅供日常参考 · 鼓励理性查阅
+  </footer>
+</div>
+</body>
+</html>
