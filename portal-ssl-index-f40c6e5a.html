@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>知识库 · 南宫体育资料索引</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f5f9fc;
+      color: #1a2a3a;
+      line-height: 1.6;
+      padding: 1.5rem;
+      min-height: 100vh;
+    }
+
+    .wrapper {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    /* header / hero */
+    .hero {
+      background: linear-gradient(145deg, #e3f2ed 0%, #d4ece4 100%);
+      border-radius: 2rem;
+      padding: 2.2rem 2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 8px 20px rgba(0, 90, 80, 0.08);
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #0b3b34;
+      margin-bottom: 0.4rem;
+    }
+
+    .hero .sub {
+      font-size: 1rem;
+      color: #2d5f55;
+      background: rgba(255, 255, 255, 0.5);
+      display: inline-block;
+      padding: 0.25rem 1rem;
+      border-radius: 30px;
+      backdrop-filter: blur(2px);
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      max-width: 78%;
+      font-size: 1.05rem;
+      color: #1f4a41;
+    }
+
+    /* 目录式网格卡片 */
+    .grid-panel {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.4rem;
+      margin-bottom: 2.8rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 1.5rem;
+      padding: 1.5rem 1.2rem;
+      box-shadow: 0 4px 12px rgba(0, 70, 60, 0.04);
+      border: 1px solid #dcefeb;
+      transition: transform 0.15s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(26, 90, 78, 0.08);
+      border-color: #9fcbc1;
+    }
+
+    .card .icon-em {
+      font-size: 1.6rem;
+      display: inline-block;
+      margin-bottom: 0.4rem;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #0d463d;
+      margin-bottom: 0.3rem;
+    }
+
+    .card p {
+      font-size: 0.94rem;
+      color: #3f5c54;
+      margin-bottom: 0.7rem;
+    }
+
+    .card .tag {
+      display: inline-block;
+      background: #dff0ea;
+      color: #176b5b;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.2rem 0.7rem;
+      border-radius: 30px;
+    }
+
+    /* 说明 + 提示 双栏 */
+    .info-duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.6rem;
+    }
+
+    .info-box {
+      background: #ffffff;
+      border-radius: 1.5rem;
+      padding: 1.5rem 1.5rem 1.8rem;
+      box-shadow: 0 4px 10px rgba(0, 60, 50, 0.03);
+      border: 1px solid #d8eae4;
+    }
+
+    .info-box h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #0b4239;
+      border-left: 5px solid #2f8f7a;
+      padding-left: 0.75rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .info-box ul, .info-box p {
+      font-size: 0.96rem;
+      color: #2a4b42;
+      margin-bottom: 0.6rem;
+    }
+
+    .info-box ul {
+      padding-left: 1.2rem;
+      list-style: square;
+    }
+
+    .info-box ul li {
+      margin-bottom: 0.3rem;
+    }
+
+    .notice {
+      background: #ebf7f2;
+      border-radius: 1.5rem;
+      padding: 1.2rem 1.5rem;
+      border-left: 8px solid #2f8f7a;
+      margin-bottom: 2.2rem;
+      font-size: 0.95rem;
+      color: #1b5245;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+    }
+
+    .notice strong {
+      color: #0b4239;
+    }
+
+    /* 相关区 */
+    .related-area {
+      background: #ffffff;
+      border-radius: 1.8rem;
+      padding: 1.8rem 1.5rem;
+      border: 1px solid #cddfd9;
+      margin-bottom: 2.2rem;
+    }
+
+    .related-area h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #0d463d;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .related-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.2rem;
+    }
+
+    .related-chip {
+      background: #ecf6f1;
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      color: #1d5a4c;
+      border: 1px solid #c4ddd3;
+    }
+
+    .faq-mini {
+      margin-top: 1.5rem;
+      border-top: 1px solid #d0e3dc;
+      padding-top: 1.2rem;
+    }
+
+    .faq-mini details {
+      margin-bottom: 0.5rem;
+      font-size: 0.94rem;
+    }
+
+    .faq-mini summary {
+      font-weight: 500;
+      color: #13574a;
+      cursor: pointer;
+    }
+
+    .faq-mini details p {
+      margin-top: 0.3rem;
+      color: #2b5d50;
+      padding-left: 0.6rem;
+    }
+
+    /* 页脚 */
+    .footer-note {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #61877b;
+      border-top: 1px solid #d1e3db;
+      padding-top: 1.8rem;
+      margin-top: 0.8rem;
+    }
+
+    .footer-note a {
+      color: #166b59;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer-note a:hover {
+      text-decoration: underline;
+    }
+
+    /* 移动端调整 */
+    @media (max-width: 680px) {
+      body { padding: 1rem; }
+      .hero { padding: 1.5rem 1.2rem; }
+      .hero p { max-width: 100%; }
+      .info-duo { grid-template-columns: 1fr; gap: 1.2rem; }
+      .grid-panel { gap: 1rem; }
+      .hero h1 { font-size: 1.8rem; }
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 1.2rem; }
+      .related-items { flex-direction: column; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- hero 区 -->
+  <div class="hero">
+    <div class="sub">📂 资料整理 · 信息索引</div>
+    <h1>南宫体育 · 知识库入口</h1>
+    <p>从信息归档与内容组织的角度出发，围绕平台特性、使用场景及延伸资料，构建一个便于检索和参考的微型索引。日常记录，随用随查。</p>
+  </div>
+
+  <!-- 网格卡片：目录感布局 -->
+  <div class="grid-panel">
+    <div class="card">
+      <div class="icon-em">📋</div>
+      <h3>平台概览</h3>
+      <p>基础信息、服务定位与主要功能模块的归纳整理，帮助快速建立整体认识。</p>
+      <span class="tag">系统性</span>
+    </div>
+    <div class="card">
+      <div class="icon-em">🔎</div>
+      <h3>功能清单</h3>
+      <p>收录常见操作路径、交互逻辑及模块说明，方便日常对照与问题定位。</p>
+      <span class="tag">操作导向</span>
+    </div>
+    <div class="card">
+      <div class="icon-em">📌</div>
+      <h3>场景速查</h3>
+      <p>根据典型使用场景整理对应入口与步骤，适合刚接触时按图索骥。</p>
+      <span class="tag">轻量指引</span>
+    </div>
+    <div class="card">
+      <div class="icon-em">📚</div>
+      <h3>延伸参考</h3>
+      <p>相关说明文档、常见术语与补充材料汇总，作为知识库的扩展部分。</p>
+      <span class="tag">资料型</span>
+    </div>
+  </div>
+
+  <!-- 双栏：说明区 + 提示区 -->
+  <div class="info-duo">
+    <div class="info-box">
+      <h2>📖 说明区</h2>
+      <p>该知识库以「南宫体育」为核心索引对象，围绕其服务框架整理出以下内容维度：</p>
+      <ul>
+        <li>基础资料与版本动态</li>
+        <li>模块功能与交互逻辑</li>
+        <li>常见使用方式与路径</li>
+        <li>辅助参考与术语解释</li>
+      </ul>
+      <p style="margin-top: 0.6rem;">所有条目均来自日常整理，内容会随平台更新而迭代，保持相对同步。</p>
+    </div>
+    <div class="info-box">
+      <h2>💡 提示区</h2>
+      <p>信息索引建议：</p>
+      <ul>
+        <li>先浏览「平台概览」卡片建立整体印象</li>
+        <li>遇到具体操作可查阅「功能清单」</li>
+        <li>初次使用推荐走一遍「场景速查」</li>
+        <li>更多背景资料可移步「延伸参考」</li>
+      </ul>
+      <p style="margin-top: 0.6rem; background: #e4f3ec; padding: 0.3rem 0.7rem; border-radius: 30px; display: inline-block;">📌 记得将常用条目收藏或记录</p>
+    </div>
+  </div>
+
+  <!-- 提示横幅 -->
+  <div class="notice">
+    <span style="font-size: 1.3rem;">📌</span>
+    <div><strong>索引说明：</strong> 本页为静态知识库入口，所有整理内容均指向 <a href="https://portal-ssl-ngsport.com" style="color: #0b5a4a; font-weight: 600; text-decoration: underline;">南宫体育</a> 及其相关资料体系。建议搭配浏览器书签使用，方便随时调阅。</div>
+  </div>
+
+  <!-- 相关信息区 -->
+  <div class="related-area">
+    <h2>🧩 相关信息区</h2>
+    <div class="related-items">
+      <span class="related-chip">⚙️ 服务动态</span>
+      <span class="related-chip">📆 更新记录</span>
+      <span class="related-chip">📎 常用链接</span>
+      <span class="related-chip">🧭 导航辅助</span>
+      <span class="related-chip">📁 归档模板</span>
+      <span class="related-chip">🔖 术语对照</span>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-mini">
+      <details>
+        <summary>❓ 知识库的内容来源是哪里？</summary>
+        <p>主要来自日常使用过程中的整理、官方公开信息以及社区辅助资料，不包含非公开或误导性内容。</p>
+      </details>
+      <details>
+        <summary>❓ 页面多久更新一次？</summary>
+        <p>没有固定周期，通常跟随平台功能调整或资料积累节奏进行补充与修订。</p>
+      </details>
+      <details>
+        <summary>❓ 有没有更详细的分类索引？</summary>
+        <p>目前以卡片式目录为主，后续可能会按模块拆分为独立子页，届时会在本入口同步说明。</p>
+      </details>
+    </div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer-note">
+    <span>➡️ 主要索引对象：<a href="https://portal-ssl-ngsport.com">南宫体育</a> ｜ 资料整理 · 仅供个人参考</span><br>
+    <span style="opacity: 0.6;">知识库入口 · 目录感布局 · v1.2</span>
+  </div>
+
+</div>
+</body>
+</html>
